@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -22,6 +23,7 @@ const connection = mongoose.connection;
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB!");
 });
+
 
 const booksRouter = require("./routes/books");
 
@@ -43,7 +45,7 @@ if(process.env.NODE_ENV === "production") {
 
   //index.html for all page routes
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(_dirname, "../client/build/index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   })
 }
 
